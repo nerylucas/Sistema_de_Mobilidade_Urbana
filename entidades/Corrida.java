@@ -59,6 +59,18 @@ public class Corrida {
         
     }
 
+    public void setValorFinal(double valor) {
+        this.valorFinal = valor;
+    }
+
+    public double getDistanciaKm() {
+        return distanciaKm;
+    }
+
+    public void setDistanciaKm(double distanciaKm) {
+        this.distanciaKm = distanciaKm;
+    }
+
     public void iniciarViagem() {
         this.status = StatusCorrida.EM_ANDAMENTO;
         System.out.println("Corrida iniciada às " + data + "! Você partirá de " + origem + " e chegará a " + destino);
@@ -80,3 +92,4 @@ public class Corrida {
     	return metodoPagamento;
     }
 }
+
