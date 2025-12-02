@@ -3,15 +3,15 @@ import entidades.*;
 import excecoes.*;
 public class ServicoDeCorrida {
 
-	public Corrida solicitarCorrida(Corrida c, Passageiro p, String origem, String destino, Categoria cat) throws PassageiroPendenteException {
+	public Corrida solicitarCorrida(Passageiro p, String origem, String destino, Categoria cat) throws PassageiroPendenteException {
 		if(p.isEmDebito()) {
-			throw new PassageiroPendenteException("O passageiro não pode solicitar uma nova viagem enquanto possui pendências.");
-		}
-		else {
-		c.setStatus(StatusCorrida.SOLICITADA);
-		System.out.println("Corrida do passageiro " +p+" solicitada! A viagem saíra de " +origem+" e irá até " +destino+"! A viagem será realizada na categoria "+cat+"!");
-		}
-		return null;
+	        throw new PassageiroPendenteException("O passageiro não pode solicitar...");
+	    }
+	    
+	    Corrida c = new Corrida(p, origem, destino, cat, 0);
+	    c.setStatus(StatusCorrida.SOLICITADA);
+	    System.out.println("Corrida solicitada de " + origem + " até " + destino);
+		return c;
 		}
 		
 	
@@ -50,18 +50,18 @@ public class ServicoDeCorrida {
         	     throw new PagamentoRecusadoException("Pagamento recusado: " + e.getMessage());
         	 } 
 	}
-	public void cancelarCorrida(Corrida c, double km, Motorista m) throws EstadoInvalidoDaCorridaException {
-		if(c.getStatus() == StatusCorrida.FINALIZADA) {
-		throw new EstadoInvalidoDaCorridaException("Não existe nenhuma corrida solicitada ou em andamento.");
+	public void cancelarCorrida(Corrida c) throws EstadoInvalidoDaCorridaException {
+	    if(c.getStatus() == StatusCorrida.FINALIZADA) {
+	        throw new EstadoInvalidoDaCorridaException("Corrida já finalizada!");
+	    }
+	    
+	    c.setStatus(StatusCorrida.CANCELADA); // ✅ CANCELADA, não FINALIZADA
+	    
+	    if(c.getMotorista() != null) {
+	        c.getMotorista().setStatus(StatusMotorista.ONLINE);
+	    }
 	}
-	else {
-			c.setStatus(StatusCorrida.FINALIZADA);
-			m.setStatus(StatusMotorista.ONLINE);
-	}
-		}
-	
-	
-	}
+}
 	
 	
 	
