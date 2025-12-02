@@ -71,6 +71,10 @@ public class Corrida {
         this.distanciaKm = distanciaKm;
     }
 
+    public void setMetodoPagamento(MetodoPagamento metodo) {
+        this.metodoPagamento = metodo;
+    }
+
     public void iniciarViagem() {
         this.status = StatusCorrida.EM_ANDAMENTO;
         System.out.println("Corrida iniciada às " + data + "! Você partirá de " + origem + " e chegará a " + destino);
@@ -92,4 +96,5 @@ public class Corrida {
     	return metodoPagamento;
     }
 }
+
 
