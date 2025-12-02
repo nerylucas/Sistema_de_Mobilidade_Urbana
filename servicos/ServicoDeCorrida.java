@@ -55,7 +55,7 @@ public class ServicoDeCorrida {
 	        throw new EstadoInvalidoDaCorridaException("Corrida já finalizada!");
 	    }
 	    
-	    c.setStatus(StatusCorrida.CANCELADA); // ✅ CANCELADA, não FINALIZADA
+	    c.setStatus(StatusCorrida.CANCELADA);
 	    
 	    if(c.getMotorista() != null) {
 	        c.getMotorista().setStatus(StatusMotorista.ONLINE);
@@ -65,5 +65,6 @@ public class ServicoDeCorrida {
 	
 	
 	
+
 
 
